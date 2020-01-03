@@ -1,0 +1,53 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "Clementine/1.0.0": {
+        "dependencies": {
+          "MaterialDesignThemes.Wpf": "2.5.1.1345",
+          "SearchTextBox": "1.0.0.0"
+        },
+        "runtime": {
+          "Clementine.dll": {}
+        }
+      },
+      "MaterialDesignThemes.Wpf/2.5.1.1345": {
+        "runtime": {
+          "MaterialDesignThemes.Wpf.dll": {
+            "assemblyVersion": "2.5.1.1345",
+            "fileVersion": "2.5.1.1345"
+          }
+        }
+      },
+      "SearchTextBox/1.0.0.0": {
+        "runtime": {
+          "SearchTextBox.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Clementine/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MaterialDesignThemes.Wpf/2.5.1.1345": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SearchTextBox/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
