@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class Helpers{
@@ -27,7 +27,6 @@ export class Helpers{
         }
         let obj = JSON.parse(window.localStorage['token']);
         return obj.token;
-    }
   }
   public setToken(data:any):void{
     this.setStorageToken(JSON.stringify(data));

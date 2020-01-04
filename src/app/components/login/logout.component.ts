@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router } from '@angular/router';
-import { Helpers } from '../../helpers/helpers';
+import { Helpers } from '../../../helpers/helpers';
 
 @Component({
   selector: 'app-logout',

@@ -1,7 +1,7 @@
 import {Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TokenService } from '../../services/token.service';
-import { Helpers } from '../../helpers/helpers';
+import { TokenService } from '../../../services/token.service';
+import { Helpers } from '../../../helpers/helpers';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
