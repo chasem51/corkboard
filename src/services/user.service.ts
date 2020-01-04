@@ -7,7 +7,6 @@ import { BaseService } from '../base.service';
 import { User } from '../models/user';
 import { AppConfig } from '../config/config';
 import { Helpers } from '../helpers/helpers';
-import { Observable } from 'rxjs';
 
 @Injectable()
   export class UserService extends BaseService{
@@ -18,6 +17,6 @@ import { Observable } from 'rxjs';
       }
       getUsers () : Observable<User[]> {
         return this.http.get(this.pathAPI + 'user',
-        super.header().pipe(catchError(super.handleError));
+        super.header()).pipe(catchError(super.handleError));
       }
   }

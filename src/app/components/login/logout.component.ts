@@ -1,4 +1,4 @@
-import { Component, OnInit } from 'angular/core';
+import { Component, OnInit } from '@angular/core';
 import {Router } from '@angular/router';
 import { Helpers } from '../../helpers/helpers';
 
@@ -10,6 +10,6 @@ export class LogoutComponent implements OnInit{
   constructor(private router: Router, private helpers: Helpers){ }
   ngOnInit(){
     this.helpers.logout();
-    this.SVGPathSegCurvetoQuadraticRel.navigate(['/login']);
+    this.router.navigate(['/login']);
   }
 }

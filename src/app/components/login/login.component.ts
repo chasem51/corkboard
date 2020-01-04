@@ -8,16 +8,15 @@ import { Helpers } from '../../helpers/helpers';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit{
-  constructor(private helpers: Helpers, private Router,
+  constructor(private helpers: Helpers, private router: Router,
     private tokenService: TokenService) { }
-    ngOnInit(){
+    ngOnInit(){ }
 
-}
-login(); void{
+login(): void{
   let authValues = {"Username":"pablo", "Password":"secret"};
-  this.tokenService.auth(authvalues.subscribe(token => {
+  this.tokenService.auth(authValues).subscribe(token => {
     this.helpers.setToken(token);
-    this.router.navigate(['dashboard'];)
+    this.router.navigate(['/dashboard']);
   });
   }
 }

@@ -5,10 +5,7 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class Helpers{
   private authenticationChanged = new Subject<boolean>();
-  constructor(){
-
-
-  }
+  constructor(){ }
 
   public isAuthenticated():boolean{
     return(!(window.localStorage['token'] === undefined ||
