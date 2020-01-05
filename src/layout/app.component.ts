@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import {Helpers} from '../helpers/helpers';
+import {startWith, delay} from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +16,7 @@ export class AppComponent implements AfterViewInit{
   }
   ngAfterViewInit(){
     this.subscription = this.helpers.isAuthenticationChanged().pipe(
-      startWith(this.helpers.isAuthticated()),
+      startWith(this.helpers.isAuthenticated()),
       delay(0)).subscribe((value) =>
       this.authentication = value
     );
