@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit{
     ngOnInit(){ }
 
 login(): void{
-  let authValues = {"Username":"pablo", "Password":"secret"};
+  let authValues = {"Username":"pablo", "Password":"escobar"};
   this.tokenService.auth(authValues).subscribe(token => {
     this.helpers.setToken(token);
     this.router.navigate(['/dashboard']);
