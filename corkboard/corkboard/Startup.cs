@@ -13,7 +13,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using corkboard.Models;
 using corkboard.Data;
-
+using Microsoft.AspNetCore.SpaServices;
+using Microsoft.AspNetCore.Cors;
 namespace corkboard
 {
     public class Startup
@@ -28,65 +29,79 @@ namespace corkboard
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
-
             services.AddDbContext<CoursePropsContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("CoursePropsContext")));
 
             services.AddCors(options =>
             {
-                options.AddPolicy("CorsPolicy",
-                    builder => builder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader());
-            });
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
 
-            //services.AddServerSideBlazor(); // adds blazor tooling
+                        builder.WithOrigins("http://example.com",
+                                            "http://www.contoso.com");
+                    });
+
+                options.AddPolicy("AnotherPolicy",
+                    builder =>
+                    {
+                        builder.WithOrigins("http://www.contoso.com")
+                                            .AllowAnyHeader()
+                                            .AllowAnyMethod();
+                    });
+
+            });
 
             services.AddScoped(typeof(IDataRepository<>), typeof(DataRepository<>));
 
             // In production, the Angular files will be served from this directory
-            //services.AddSpaStaticFiles(configuration =>
-            //{
-            //    configuration.RootPath = "ClientApp/dist";
-            //});
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "client/dist";
+            });
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
+            services.AddMvc(o => o.EnableEndpointRouting = false);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostEnvironment env)
         {
-            // Middleware that run before routing. Usually the following appear here:
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                //app.UseDatabaseErrorPage();
             }
             else
             {
-                app.UseExceptionHandler("/Error");
-
+                app.UseHsts();
             }
 
-            app.UseStaticFiles();
+            app.UseSpaStaticFiles();
 
-            // Runs matching. An endpoint is selected and set on the HttpContext if a match is found.
-            app.UseRouting();
-
-            // Middleware that run after routing occurs. Usually the following appear here:
-            app.UseAuthentication();
-            app.UseAuthorization();
-            app.UseCors("CorsPolicy");
-             // These middleware can take different actions based on the endpoint.
-
-            // Executes the endpoint that was selected by routing.
-            app.UseEndpoints(endpoints =>
+            app.UseMvc(routes =>
             {
-            // Mapping of endpoints goes here:
-            endpoints.MapRazorPages();
-            endpoints.MapControllers();
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller}/{action=Index}/{id?}");
             });
 
-            // Middleware here will only run if nothing was matched.
+            app.UseSpa(spa =>
+            {
+                // To learn more about options for serving an Angular SPA from ASP.NET Core,
+                // see https://go.microsoft.com/fwlink/?linkid=864501
+
+                spa.Options.SourcePath = "client";
+
+                if (env.IsDevelopment())
+                {
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+                }
+            });
+
+            // Shows UseCors with CorsPolicyBuilder.
+            app.UseCors("AnotherPolicy");
+
+            app.UseHttpsRedirection();
+
         }
     }
 }
