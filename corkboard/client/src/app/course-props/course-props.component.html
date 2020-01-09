@@ -1,1 +1,29 @@
-<p>course-props works!</p>
+<h1>Course Properties</h1>
+
+<p *ngIf="!(courseProps$ | async)"><em>Loading...</em></p>
+<p>
+  <a [routerLink]="['/add']" class="btn btn-primary float-right mb-3">New Course</a>
+</p>
+
+<table class="table table-sm table-hover" *ngIf="(courseProps$ | async)?.length>0">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Title</th>
+      <th>Creator</th>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let courseProp of (courseProps$ | async)">
+      <td>{{ courseProp.postId }}</td>
+      <td><a [routerLink]="['/courseprop/', courseProp.postId]">{{ courseProp.title }}</a></td>
+      <td>{{ courseProp.creator }}</td>
+      <td>{{ courseProp.dt | date: "dd.MM.y" }}</td>
+      <td><a [routerLink]="['/courseprop/edit/', courseProp.postId]" class="btn btn-primary btn-sm float-right">Edit</a></td>
+      <td><a [routerLink]="" (click)="delete(courseProp.postId)" class="btn btn-danger btn-sm float-right">Delete</a></td>
+    </tr>
+  </tbody>
+</table>

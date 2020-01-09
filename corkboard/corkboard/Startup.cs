@@ -40,8 +40,6 @@ namespace corkboard
                     .AllowAnyHeader());
             });
 
-
-
             services.AddScoped(typeof(IDataRepository<>), typeof(DataRepository<>));
 
             // In production, the Angular files will be served from this directory
@@ -83,6 +81,8 @@ namespace corkboard
 
                 if (env.IsDevelopment())
                 {
+                    // spa.UseAngularCliServer(npmScript: "start");
+                    // spa.UseReactDevelopmentServer(npmScript; "start");
                     spa.UseProxyToSpaDevelopmentServer("http://localhost:4200/");
                 }
             });
