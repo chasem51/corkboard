@@ -34,23 +34,13 @@ namespace corkboard
 
             services.AddCors(options =>
             {
-                options.AddDefaultPolicy(
-                    builder =>
-                    {
-
-                        builder.WithOrigins("http://example.com",
-                                            "http://www.contoso.com");
-                    });
-
-                options.AddPolicy("AnotherPolicy",
-                    builder =>
-                    {
-                        builder.WithOrigins("http://www.contoso.com")
-                                            .AllowAnyHeader()
-                                            .AllowAnyMethod();
-                    });
-
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
             });
+
+
 
             services.AddScoped(typeof(IDataRepository<>), typeof(DataRepository<>));
 
@@ -93,12 +83,12 @@ namespace corkboard
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200/");
                 }
             });
 
             // Shows UseCors with CorsPolicyBuilder.
-            app.UseCors("AnotherPolicy");
+            app.UseCors("CorsPolicy");
 
             app.UseHttpsRedirection();
 
