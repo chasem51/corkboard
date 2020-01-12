@@ -20,19 +20,19 @@ namespace corkboard.Controllers
         private readonly IDataRepository<CourseProp> _repo;
 
         public CoursePropsController(CoursePropsContext context, IDataRepository<CourseProp> repo)
-        { 
+        {
             _context = context;
             _repo = repo;
         }
 
-        // GET: api/CourseProp
+        // GET: api/CourseProps
         [HttpGet]
         public IEnumerable<CourseProp> GetCourseProps()
         {
             return _context.CourseProp.OrderByDescending(p => p.PostId);
         }
 
-        // GET: api/BlogPosts/5
+        // GET: api/CourseProps/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCourseProp([FromRoute] int id)
         {
@@ -51,7 +51,7 @@ namespace corkboard.Controllers
             return Ok(courseProp);
         }
 
-        // PUT: api/BlogPosts/5
+        // PUT: api/CourseProps/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCourseProp([FromRoute] int id, [FromBody] CourseProp courseProp)
         {
@@ -99,10 +99,10 @@ namespace corkboard.Controllers
             _repo.Add(courseProp);
             var save = await _repo.SaveAsync(courseProp);
 
-            return CreatedAtAction("GetCourseProp", new { id = courseProp.PostId }, courseProp);
+            return CreatedAtAction("GetBlogPost", new { id = courseProp.PostId }, courseProp);
         }
 
-        // DELETE: api/BlogPosts/5
+        // DELETE: api/CourseProps/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCourseProp([FromRoute] int id)
         {
@@ -111,16 +111,16 @@ namespace corkboard.Controllers
                 return BadRequest(ModelState);
             }
 
-            var courseProp = await _context.CourseProp.FindAsync(id);
-            if (courseProp == null)
+            var blogPost = await _context.CourseProp.FindAsync(id);
+            if (blogPost == null)
             {
                 return NotFound();
             }
 
-            _repo.Delete(courseProp);
-            var save = await _repo.SaveAsync(courseProp);
+            _repo.Delete(blogPost);
+            var save = await _repo.SaveAsync(blogPost);
 
-            return Ok(courseProp);
+            return Ok(blogPost);
         }
 
         private bool CoursePropExists(int id)

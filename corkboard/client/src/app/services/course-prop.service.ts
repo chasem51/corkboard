@@ -19,7 +19,7 @@ export class CoursePropService {
   };
   constructor(private http: HttpClient) {
       this.myAppUrl = environment.appUrl;
-      this.myApiUrl = 'api/BlogPosts/';
+      this.myApiUrl = 'api/CourseProps/';
   }
 
   getCourseProps(): Observable<CourseProp[]> {
