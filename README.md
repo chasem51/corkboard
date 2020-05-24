@@ -21,8 +21,8 @@ The control flow of this desktop application mostly follows the button clicks of
 Project Technology: 
 
 C#
-Python
-React
+Python 3.7.4
+React 16.13.1
 .NET core 3.0
 
 GitHub Repository Link: https://github.com/chasem51/corkboard/corkboard
