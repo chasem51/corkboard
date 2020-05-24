@@ -2,9 +2,9 @@ Clementine Productions
 
 Team Members:
 
-Chase Maivald: Technical Lead
-Raunaq Zamal: Specification Lead
-Paige Hartley: Interface Lead
+Chase Maivald: Technical Lead,
+Raunaq Zamal: Specification Lead,
+Paige Hartley: Interface Lead,
 Nafis Abeer: Project Lead
 
 Team Mentor: Miguel Mark
@@ -20,9 +20,9 @@ The control flow of this desktop application mostly follows the button clicks of
 
 Project Technology: 
 
-C#
-Python 3.7.4
-React 16.13.1
-.NET core 3.0
+C#,
+Python 3.7.4,
+React 16.13.1,
+ASP.NET 3.0
 
-GitHub Repository Link: https://github.com/chasem51/corkboard/corkboard
+GitHub Repository Link: https://github.com/chasem51/corkboard/tree/master/corkboard
